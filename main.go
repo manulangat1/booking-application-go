@@ -17,7 +17,7 @@ func main() {
 	// var bookings = [50]string{}
 	var bookings []string
 
-	for {
+	for len(bookings) < 2 {
 		var userName string
 		var userTickets uint
 		var email string
@@ -34,6 +34,12 @@ func main() {
 
 		// bookings[0] = userName
 		bookings = append(bookings, userName)
+
+		if userTickets > remainingTickets {
+			fmt.Println("Invalid input, please select the  correct number of tickets remaining. ")
+			// break
+			continue
+		}
 
 		remainingTickets = remainingTickets - userTickets
 
@@ -56,6 +62,14 @@ func main() {
 
 		}
 		fmt.Printf("%v \n", firstNames)
+
+		noTicketsRemaining := remainingTickets <= 0
+
+		if noTicketsRemaining {
+			//  end the program
+			fmt.Println("Conference is booked out. Please come back next year!")
+			break
+		}
 
 	}
 
