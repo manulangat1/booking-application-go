@@ -3,6 +3,19 @@ package main
 import "fmt"
 
 func main() {
-	fmt.Println("Welcome to our conference booking application")
-	fmt.Println("Get your tickets to attend!")
+	var conferenceName = "Go Conference"
+	const conferenceTickets = 50
+	var remainingTickets = 50
+	fmt.Printf("Welcome to %v booking application", conferenceName)
+	fmt.Printf("We have a total of %v", conferenceTickets)
+	fmt.Printf("Get your tickets to attend! %v still up for grabs!", remainingTickets)
+
+	
+
+	var userName
+	// ask user for thier name
+
+	userName = "Tom"
+	fmt.Println(userName)
+
 }
