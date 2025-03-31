@@ -5,10 +5,14 @@ import (
 	"strings"
 )
 
+var conferenceName string = "Go Conference"
+
+const conferenceTickets uint = 50
+
+var remainingTickets uint = 50
+
 func main() {
-	conferenceName := "Go Conference"
-	conferenceTickets := 50
-	var remainingTickets uint = 50
+
 	fmt.Printf("Welcome to %v booking application \n", conferenceName)
 	fmt.Printf("We have a total of %v \n", conferenceTickets)
 	fmt.Printf("Get your tickets to attend! %v still up for grabs! \n", remainingTickets)
@@ -32,6 +36,13 @@ func main() {
 		fmt.Println("How many tickets do you want to book?")
 		fmt.Scan(&userTickets)
 
+		validUserInputs := validateUserInput(userName, email, userTickets, remainingTickets)
+
+		if !validUserInputs {
+			fmt.Println("Invalid  input")
+			break
+		}
+
 		// bookings[0] = userName
 		bookings = append(bookings, userName)
 
@@ -53,18 +64,11 @@ func main() {
 		fmt.Printf("Type of Slice is: %T \n", bookings)
 		fmt.Printf("Slice length :v %v \n", len(bookings))
 
-		firstNames := []string{}
-		for _, booking := range bookings {
-			names := strings.Fields(booking)
-			firstName := names[0]
-			fmt.Println("My name is \n", firstName)
-			firstNames = append(firstNames, firstName)
-
-		}
-		fmt.Printf("%v \n", firstNames)
-
 		noTicketsRemaining := remainingTickets <= 0
 
+		firstNames := printFirstNames(bookings, conferenceName)
+
+		fmt.Printf("%v \n", firstNames)
 		if noTicketsRemaining {
 			//  end the program
 			fmt.Println("Conference is booked out. Please come back next year!")
@@ -75,4 +79,22 @@ func main() {
 
 	// slice is an abstraction of an array: Create a new array without a size dfn
 
+}
+
+func greetUsers(name string, confName string) {
+	fmt.Println("Hi", name, "Welcome to ", confName)
+}
+
+func printFirstNames(bookings []string, conferenceName string) []string {
+	firstNames := []string{}
+	for _, booking := range bookings {
+		names := strings.Fields(booking)
+		firstName := names[0]
+		fmt.Println("My name is \n", firstName)
+		firstNames = append(firstNames, firstName)
+
+		greetUsers(firstName, conferenceName)
+
+	}
+	return firstNames
 }
